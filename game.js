@@ -1,74 +1,102 @@
 
-// pc ye 1-20 arasında sayı tuttrduk
-let rasgeleSayı = Math.ceil(Math.random()*20)
-// console.log(rasgeleSayı);
+//?PC'ye 1-20 arasında bir sayı tutturduk
+let rastgeleSayi =  Math.ceil(Math.random()*20)
+console.log(rastgeleSayi)
 
 let mesaj = document.querySelector(".msg");
 
 let skor = 10;
-// skoru index.htmlden çekebilirdik.ama çok kullanacağımız için bu daha tercih edilen bir yol.
-let enYüksekSkor = 0;
+//skoru index.html'den çekebilirdik. Ama çok kullnacağımız için bu daha tercih edilen bir yol.
+let enYuksekSkor = 0;
 
-document.querySelector(".check").addEventListener("click", ()=>{
-    // inputa girilen değere yani kullanıcının tahiminine erişmek istiyorum
+
+document.querySelector(".check").addEventListener("click", () => {
     const tahmin = document.querySelector(".guess").value
-    // console.log(tahmin);
+    // console.log(tahmin)
+    // document.querySelector(".guess").value = "";
 
-// ilk tahmin yoksa tahmin girmeden butona bastıysak
 
-if (!tahmin) {
-    mesaj.textContent = "lütfen bir sayı giriniz..."
-    // tahmin doğruysa 
-} else if(tahmin === rasgeleSayı) {
-    
-    mesaj.textContent = "tebrikler bildiniz...."
-    document.querySelector("body").style.backgroundColor= "green"
-    document.querySelector(".number").textContent = rasgeleSayı;
+    //!Tahmin girmeden butona basıldıysa
+    if (!tahmin) {
+        mesaj.textContent = "Lütfen bir sayı giriniz..."
 
-    // top-score kontrolu yap
-    // !tahmin yanlışsa
-}else{
-    // ?skor 1 den büyük olduğu sürece hakkım var 
-    if(skor>1){
-        skor--;
-        document.querySelector(".score").textContent= skor
-        // turnary yöntemi  kullandık
-        tahmin<rasgeleSayı ? mesaj.textContent= "Arttır" : mesaj.textContent= "Azalt"
+    //!Tahminim Doğruysa    
+    } else if(tahmin == rastgeleSayi) {
+        
+        mesaj.textContent = "Tebrikler Bildiniz...👏"
+        document.querySelector("body").style.backgroundColor = "green"
+        document.querySelector(".number").textContent = rastgeleSayi;
+
+        // top-score Kontrolü yap 
+
+        if (skor > enYuksekSkor ) {
+            enYuksekSkor = skor
+            document.querySelector(".top-score").textContent = skor
+        }
+    //!Tahmin Yanlışsa    
     }else{
-// GAME OVER 
-mesaj.textContent = "oyunu kaybettiniz :( "
-document.querySelectorİ(".score").textContent = 0;
-document.querySelector("body").style.backgroundColor = "red"
+        //? Skor 1'den büyük olduğu sürece hakkım var
+
+        if (skor > 1) {
+            skor--;
+            document.querySelector(".score").textContent = skor
+
+            tahmin < rastgeleSayi 
+            ? mesaj.textContent = "Arttır👆" 
+            : mesaj.textContent = "Azalt👇"
+        } else {
+            //! GAME OVER
+            mesaj.textContent = "Oyunu Kaybettiniz🥺"
+            document.querySelector(".score").textContent = 0;
+            document.querySelector("body").style.backgroundColor = "red"
+
+        }
+        
     }
-}
 
-})
+} )
 
-// Again butonuna basınca ayarlar başlangıç değerlerine kurulsun.arka plan #2d3436 olsun
+//?Again butonuna basınca ayarlar başlangıç değerlerine kurulsun. Aka plan #2d3436 olsun
 
-document.querySelector(".again").onclick = ()=>{
+document.querySelector(".again").onclick = () => {
+
     document.querySelector("body").style.backgroundColor = "#2d3436"
-    rasgeleSayı = Math.ceil( Math.random()*20)
-    console.log("rastgele sayı:",rasgeleSayı);
 
-    skor=10;
-    document.querySelector(".score").textContent=skor
-    document.querySelector(".number").textContent="?"
-    document.querySelector(".guess").value ="";
-    mesaj.textContent = "oyun yeni oyun için başlıyor..."
+    rastgeleSayi = Math.ceil(Math.random() * 20 )
+    console.log("yeni rastgele sayı", rastgeleSayi)
+
+    skor = 10;
+
+    document.querySelector(".score").textContent = skor
+
+    document.querySelector(".number").textContent = "?"
+
+    document.querySelector(".guess").value = "";
+
+    mesaj.textContent = "Oyun yeni oyuncu için başlıyor... "
+
 }
 
 
-// ! ENTER TUŞU ÇALIŞSIN..
-// KLAVYEDEN ENTER BUTONUNA BASILDIĞINDA CHECK BUTONUNU TETİKLE 
+//! ENTER tuşu çalışsın!
 
-document.addEventListener("keydown",function(e){
-    console.log(e);
-    if (e.key==="enter") {
-       document.querySelector(".check").click ()
+//Klavyeden enter butonuna basıldığında check butonunu tetikle
+
+document.addEventListener("keydown", function(e){
+    // console.log(e)
+
+    if (e.key === "Enter") {
+        document.querySelector(".check").click()
     }
-})
+} )
 
 
+
+
+
+// !LOCAL STORGE ÖRNEĞİ CONSOLDAN APPLİCATİONA TIKLADIĞIMIZDA LOCAL STORAGE TIKLAYTINCA SAKLADIĞINI GÖREBİİYORUZ.
+// localStorage.setItem("harvey",555)
+// GETITEM İLE CONSOLDA GÖREBİLİYORUZ.GETİREBİLİYORUZ.
+// console.log(localStorage.getItem("harvey"))
  
 
